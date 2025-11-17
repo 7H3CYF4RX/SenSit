@@ -1,0 +1,34 @@
+# Sample file with test secrets for SenSIt
+
+# AWS Credentials
+AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+# Stripe Keys
+STRIPE_SECRET_KEY=sk_live_51HqT8pKZvKYlo2C8L9vZmQ4kZvKYlo2C8L9vZmQ4
+STRIPE_TEST_KEY=sk_test_51HqT8pKZvKYlo2C8L9vZmQ4kZvKYlo2C8L9vZmQ4
+
+# GitHub Token
+GITHUB_TOKEN=ghp_1234567890abcdefghijklmnopqrstuvwxyz
+
+# Database Connection
+DATABASE_URL=postgres://admin:SuperSecret123@db.example.com:5432/production
+
+# API Keys
+API_KEY=AIzaSyD1234567890abcdefghijklmnopqrstuvw
+TWILIO_ACCOUNT_SID=AC1234567890abcdefghijklmnopqrstuv
+TWILIO_AUTH_TOKEN=1234567890abcdefghijklmnopqrstuv
+
+# Slack Webhook
+SLACK_WEBHOOK=https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+
+# JWT Token
+JWT_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+# Private Key
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEA1234567890abcdefghijklmnopqrstuvwxyz
+-----END RSA PRIVATE KEY-----
+
+# High Entropy String
+SECRET_TOKEN=9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08

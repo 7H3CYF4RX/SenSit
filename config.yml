@@ -1,0 +1,86 @@
+# SenSIt Configuration File
+
+# AI Provider Settings (choose one: openai, gemini, ollama)
+ai_provider: "openai"  # Options: openai, gemini, ollama
+
+# OpenAI Settings
+openai:
+  api_key: ""  # Set via OPENAI_API_KEY environment variable
+  model: "gpt-4o-mini"
+  max_tokens: 500
+  temperature: 0.3
+  batch_size: 10
+
+# Google Gemini Settings
+gemini:
+  api_key: ""  # Set via GEMINI_API_KEY environment variable
+  model: "gemini-pro"
+  max_tokens: 500
+  temperature: 0.3
+  batch_size: 10
+
+# Ollama Settings (Local)
+ollama:
+  base_url: "http://localhost:11434"
+  model: "llama3"  # Options: llama2, llama3, mistral, codellama, etc.
+  max_tokens: 500
+  temperature: 0.3
+  batch_size: 5
+
+# Scanning Settings
+scanning:
+  max_depth: 3
+  max_pages: 500
+  rate_limit: 10  # requests per second
+  timeout: 10
+  user_agent: "SenSIt/1.0 Security Scanner"
+  follow_redirects: true
+  verify_ssl: true
+
+# Discovery Settings (Web Crawling)
+discovery:
+  max_depth: 2  # How deep to crawl (0 = single page, 1 = + linked pages, 2 = + their links)
+  max_pages: 50  # Maximum pages to crawl per domain
+  include_js: true  # Include JavaScript files
+  include_css: false  # Include CSS files
+  enable_crawler: true
+  enable_js_extraction: true
+  enable_git_scanner: true
+  enable_file_finder: true
+  enable_archive_extraction: true
+
+# Extraction Settings
+extraction:
+  min_entropy: 3.5
+  min_length: 12
+  context_lines: 5
+  enable_heuristic_filter: true
+
+# Validation Settings
+validation:
+  enable_ai_validation: true
+  enable_api_validation: true
+  ai_confidence_threshold: 70
+  api_timeout: 10
+  max_retries: 3
+
+# Output Settings
+output:
+  format: "cli"  # cli, json, html, all
+  verbose: true
+  show_context: true
+  export_path: "./reports"
+
+# Performance Settings
+performance:
+  enable_cache: true
+  cache_ttl: 86400  # 24 hours
+  max_workers: 10
+  chunk_size: 100
+
+# Proxy Settings (optional)
+proxy:
+  enabled: false
+  http: ""
+  https: ""
+  rotation: false

@@ -1,0 +1,168 @@
+# Secret Detection Patterns
+
+aws_access_key:
+  pattern: '(?:A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'
+  entropy_min: 3.5
+  description: "AWS Access Key ID"
+  severity: "CRITICAL"
+  validation: "aws_sts"
+
+aws_secret_key:
+  pattern: '(?i)aws(.{0,20})?[''"][0-9a-zA-Z/+]{40}[''"]'
+  entropy_min: 4.5
+  description: "AWS Secret Access Key"
+  severity: "CRITICAL"
+  validation: "aws_sts"
+  context_keywords: ['aws', 'secret', 'access']
+
+stripe_secret_key:
+  pattern: 'sk_(live|test)_[0-9a-zA-Z]{24,}'
+  entropy_min: 3.5
+  description: "Stripe Secret Key"
+  severity: "CRITICAL"
+  validation: "stripe_api"
+
+stripe_restricted_key:
+  pattern: 'rk_(live|test)_[0-9a-zA-Z]{24,}'
+  entropy_min: 3.5
+  description: "Stripe Restricted Key"
+  severity: "HIGH"
+  validation: "stripe_api"
+
+github_token:
+  pattern: 'gh[pousr]_[A-Za-z0-9_]{36,}'
+  entropy_min: 3.5
+  description: "GitHub Personal Access Token"
+  severity: "CRITICAL"
+  validation: "github_api"
+
+github_oauth:
+  pattern: 'gho_[A-Za-z0-9_]{36,}'
+  entropy_min: 3.5
+  description: "GitHub OAuth Token"
+  severity: "CRITICAL"
+  validation: "github_api"
+
+twilio_account_sid:
+  pattern: 'AC[a-z0-9]{32}'
+  entropy_min: 3.0
+  description: "Twilio Account SID"
+  severity: "HIGH"
+  validation: "twilio_api"
+
+twilio_auth_token:
+  pattern: '(?i)twilio(.{0,20})?[''"][a-z0-9]{32}[''"]'
+  entropy_min: 3.5
+  description: "Twilio Auth Token"
+  severity: "CRITICAL"
+  validation: "twilio_api"
+  context_keywords: ['twilio', 'auth', 'token']
+
+slack_webhook:
+  pattern: 'https://hooks\.slack\.com/services/T[A-Z0-9]{8,}/B[A-Z0-9]{8,}/[A-Za-z0-9]{24,}'
+  entropy_min: 0
+  description: "Slack Webhook URL"
+  severity: "MEDIUM"
+  validation: "slack_webhook"
+
+slack_token:
+  pattern: 'xox[baprs]-[0-9]{10,13}-[0-9]{10,13}-[A-Za-z0-9]{24,}'
+  entropy_min: 3.5
+  description: "Slack API Token"
+  severity: "HIGH"
+  validation: "slack_api"
+
+discord_webhook:
+  pattern: 'https://discord(?:app)?\.com/api/webhooks/[0-9]{18,}/[A-Za-z0-9_-]{68,}'
+  entropy_min: 0
+  description: "Discord Webhook URL"
+  severity: "MEDIUM"
+  validation: "discord_webhook"
+
+jwt_token:
+  pattern: 'eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}'
+  entropy_min: 4.0
+  description: "JSON Web Token"
+  severity: "HIGH"
+  validation: "jwt_decode"
+
+rsa_private_key:
+  pattern: '-----BEGIN RSA PRIVATE KEY-----'
+  entropy_min: 0
+  description: "RSA Private Key"
+  severity: "CRITICAL"
+  validation: "key_parse"
+  multi_line: true
+
+private_key:
+  pattern: '-----BEGIN PRIVATE KEY-----'
+  entropy_min: 0
+  description: "Private Key"
+  severity: "CRITICAL"
+  validation: "key_parse"
+  multi_line: true
+
+gcp_api_key:
+  pattern: 'AIza[0-9A-Za-z\\-_]{35}'
+  entropy_min: 3.5
+  description: "Google Cloud API Key"
+  severity: "HIGH"
+  validation: "gcp_api"
+
+firebase_api_key:
+  pattern: 'AIza[0-9A-Za-z\\-_]{35}'
+  entropy_min: 3.5
+  description: "Firebase API Key"
+  severity: "HIGH"
+  validation: "firebase_test"
+  context_keywords: ['firebase', 'firebaseConfig']
+
+postgres_connection:
+  pattern: 'postgres(?:ql)?://[a-zA-Z0-9_-]+:[a-zA-Z0-9_@!#$%^&*()-+=]+@[a-zA-Z0-9.-]+(?::[0-9]+)?/[a-zA-Z0-9_-]+'
+  entropy_min: 3.0
+  description: "PostgreSQL Connection String"
+  severity: "CRITICAL"
+  validation: "none"
+
+mysql_connection:
+  pattern: 'mysql://[a-zA-Z0-9_-]+:[a-zA-Z0-9_@!#$%^&*()-+=]+@[a-zA-Z0-9.-]+(?::[0-9]+)?/[a-zA-Z0-9_-]+'
+  entropy_min: 3.0
+  description: "MySQL Connection String"
+  severity: "CRITICAL"
+  validation: "none"
+
+mongodb_connection:
+  pattern: 'mongodb(?:\+srv)?://[a-zA-Z0-9_-]+:[a-zA-Z0-9_@!#$%^&*()-+=]+@[a-zA-Z0-9.-]+(?::[0-9]+)?/[a-zA-Z0-9_-]+'
+  entropy_min: 3.0
+  description: "MongoDB Connection String"
+  severity: "CRITICAL"
+  validation: "none"
+
+generic_api_key:
+  pattern: '(?i)(api[_-]?key|apikey)(.{0,20})?[''"]([a-zA-Z0-9_-]{20,})[''"]'
+  entropy_min: 4.0
+  description: "Generic API Key"
+  severity: "MEDIUM"
+  validation: "ai_only"
+
+generic_secret:
+  pattern: '(?i)(secret|password|passwd|pwd)(.{0,20})?[''"]([a-zA-Z0-9_!@#$%^&*()-+=]{12,})[''"]'
+  entropy_min: 3.5
+  description: "Generic Secret"
+  severity: "MEDIUM"
+  validation: "ai_only"
+
+bearer_token:
+  pattern: 'Bearer\s+[A-Za-z0-9_-]{20,}'
+  entropy_min: 3.5
+  description: "Bearer Token"
+  severity: "MEDIUM"
+  validation: "ai_only"
+
+base64_secret:
+  pattern: '(?:[A-Za-z0-9+/]{4}){10,}(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?'
+  entropy_min: 4.5
+  description: "Base64 Encoded Secret"
+  severity: "LOW"
+  validation: "ai_only"
+  min_length: 40
