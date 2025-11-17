@@ -71,7 +71,7 @@
 
 ```bash
 # Clone repository
-cd /home/viruz/Tools/Sen-SIt
+git clone https://github.com/7H3CYF4RX/SenSit.git
 
 # Install dependencies
 pip install -r requirements.txt
